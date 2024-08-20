@@ -1,0 +1,8 @@
+O banco de dados serve para o armazenamento, recuperação de informações 
+
+O flaskSQLAlchemy ajuda a sua aplicação se conectar a um banco de dados
+
+flask shell 
+db.create_all()
+db.session
+db.session.commit() -> Pega tudo que vc fez nessa seção e executa o comando no banco de dados
