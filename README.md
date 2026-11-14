@@ -1,63 +1,63 @@
 # 🔐 Sample Flask Auth
 
-## 📝 Sobre o projeto
+## 📝 About the project
 
-API de autenticação desenvolvida com **Flask** e **Flask-Login**, utilizando banco de dados **MySQL** containerizado com **Docker** para persistência de dados de usuários. O projeto implementa um sistema completo de autenticação com registro, login, logout e gerenciamento de sessões.
+Authentication API built with **Flask** and **Flask-Login**, using a **MySQL** database containerized with **Docker** to persist user data. The project implements a complete authentication system with registration, login, logout and session management.
 
-Repositório criado para armazenar o código da API de autenticação com banco de dados, demonstrando conceitos essenciais de:
-- Sistema de autenticação completo
-- Gerenciamento de sessões com Flask-Login
-- Persistência de dados com SQLAlchemy e MySQL
-- Containerização com Docker
-- Criptografia de senhas
+Repository created to store the code of the authentication API with a database, demonstrating essential concepts such as:
+- A complete authentication system
+- Session management with Flask-Login
+- Data persistence with SQLAlchemy and MySQL
+- Containerization with Docker
+- Password hashing
 - ORM (Object-Relational Mapping)
 
-## 🚀 Tecnologias utilizadas
+## 🚀 Technologies used
 
 - **Python 3.x**
-- **Flask 2.3.0** - Framework web
-- **Flask-SQLAlchemy 3.1.1** - ORM para banco de dados
-- **Flask-Login 0.6.2** - Gerenciamento de autenticação e sessões
-- **MySQL** - Banco de dados relacional
-- **Docker** - Containerização do banco de dados
-- **PyMySQL 1.1.0** - Conector MySQL para Python
-- **Werkzeug 2.3.0** - WSGI toolkit e criptografia
-- **Cryptography 41.0.7** - Biblioteca de criptografia
+- **Flask 2.3.0** - Web framework
+- **Flask-SQLAlchemy 3.1.1** - Database ORM
+- **Flask-Login 0.6.2** - Authentication and session management
+- **MySQL** - Relational database
+- **Docker** - Database containerization
+- **PyMySQL 1.1.0** - MySQL connector for Python
+- **Werkzeug 2.3.0** - WSGI toolkit and password hashing
+- **Cryptography 41.0.7** - Cryptography library
 
-## ⚙️ Como executar
+## ⚙️ How to run
 
-### Pré-requisitos
+### Prerequisites
 
-- Python 3.x instalado
-- Docker e Docker Compose instalados
-- pip (gerenciador de pacotes Python)
+- Python 3.x installed
+- Docker and Docker Compose installed
+- pip (Python package manager)
 
-### Configuração do Banco de Dados com Docker
+### Database Setup with Docker
 
-1. Inicie o container MySQL usando Docker Compose:
+1. Start the MySQL container using Docker Compose:
 ```bash
 docker-compose up -d
 ```
 
-2. Verifique se o container está rodando:
+2. Check that the container is running:
 ```bash
 docker ps
 ```
 
-### Instalação
+### Installation
 
-1. Clone o repositório:
+1. Clone the repository:
 ```bash
 git clone https://github.com/luisaferreirass/sample-flask-auth.git
 cd sample-flask-auth
 ```
 
-2. Crie um ambiente virtual (recomendado):
+2. Create a virtual environment (recommended):
 ```bash
 python -m venv venv
 ```
 
-3. Ative o ambiente virtual:
+3. Activate the virtual environment:
 ```bash
 # Windows
 venv\Scripts\activate
@@ -66,30 +66,30 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-4. Instale as dependências:
+4. Install the dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Executando a aplicação
+### Running the application
 ```bash
 python app.py
 ```
 
-A API estará disponível em: `http://localhost:5000`
+The API will be available at: `http://localhost:5000`
 
-### Parando os serviços
+### Stopping the services
 ```bash
-# Parar o container MySQL
+# Stop the MySQL container
 docker-compose down
 
-# Parar e remover volumes (apaga os dados)
+# Stop and remove volumes (deletes the data)
 docker-compose down -v
 ```
 
-## 🐳 Configuração do Docker
+## 🐳 Docker Configuration
 
-### Credenciais do MySQL (docker-compose.yml)
+### MySQL credentials (docker-compose.yml)
 ```yaml
 MYSQL_USER: admin
 MYSQL_PASSWORD: admin123
@@ -97,48 +97,48 @@ MYSQL_DATABASE: flask-crud
 MYSQL_ROOT_PASSWORD: admin123
 ```
 
-### Conexão da aplicação
+### Application connection
 ```python
 SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://admin:admin123@localhost:3306/flask-crud'
 ```
 
-## 🎯 Funcionalidades
+## 🎯 Features
 
-- 📝 **Registro de usuários** com validação de dados
-- 🔑 **Login** com autenticação segura
-- 🚪 **Logout** para encerrar sessão
-- 🔒 **Rotas protegidas** que requerem autenticação
-- 👤 **Gerenciamento de sessões** com Flask-Login
-- 💾 **Persistência de dados** em MySQL via Docker
-- 🔐 **Criptografia de senhas** com Werkzeug
-- 🐳 **Banco de dados containerizado**
+- 📝 **User registration** with data validation
+- 🔑 **Login** with secure authentication
+- 🚪 **Logout** to end the session
+- 🔒 **Protected routes** that require authentication
+- 👤 **Session management** with Flask-Login
+- 💾 **Data persistence** in MySQL via Docker
+- 🔐 **Password hashing** with Werkzeug
+- 🐳 **Containerized database**
 
-## 🛠️ Modelo de dados
+## 🛠️ Data model
 
-### User (Usuário)
+### User
 
-| Campo | Tipo | Descrição |
+| Field | Type | Description |
 |-------|------|-----------|
-| id | Integer | Chave primária (auto-incremento) |
-| username | String | Nome de usuário (único) |
-| email | String | E-mail do usuário (único) |
-| password | String | Senha criptografada |
-| created_at | DateTime | Data de criação da conta |
+| id | Integer | Primary key (auto-increment) |
+| username | String | Username (unique) |
+| email | String | User email (unique) |
+| password | String | Hashed password |
+| created_at | DateTime | Account creation date |
 
-## 📸 Endpoints da API
+## 📸 API Endpoints
 
-### Autenticação
+### Authentication
 
-| Método | Endpoint | Descrição | Autenticação |
+| Method | Endpoint | Description | Auth required |
 |--------|----------|-----------|--------------|
-| POST | `/register` | Registra um novo usuário | Não |
-| POST | `/login` | Autentica usuário e cria sessão | Não |
-| POST | `/logout` | Encerra a sessão do usuário | Sim |
-| GET | `/profile` | Retorna dados do usuário logado | Sim |
+| POST | `/register` | Registers a new user | No |
+| POST | `/login` | Authenticates the user and creates a session | No |
+| POST | `/logout` | Ends the user's session | Yes |
+| GET | `/profile` | Returns the logged-in user's data | Yes |
 
-## 💡 Exemplos de uso
+## 💡 Usage examples
 
-### Registrar um novo usuário
+### Register a new user
 ```bash
 POST /register
 Content-Type: application/json
@@ -146,11 +146,11 @@ Content-Type: application/json
 {
   "username": "johndoe",
   "email": "john@example.com",
-  "password": "senha123"
+  "password": "password123"
 }
 ```
 
-**Resposta:**
+**Response:**
 ```json
 {
   "message": "Usuário registrado com sucesso",
@@ -158,18 +158,18 @@ Content-Type: application/json
 }
 ```
 
-### Fazer login
+### Log in
 ```bash
 POST /login
 Content-Type: application/json
 
 {
   "username": "johndoe",
-  "password": "senha123"
+  "password": "password123"
 }
 ```
 
-**Resposta:**
+**Response:**
 ```json
 {
   "message": "Login realizado com sucesso",
@@ -181,13 +181,13 @@ Content-Type: application/json
 }
 ```
 
-### Acessar perfil (rota protegida)
+### Access the profile (protected route)
 ```bash
 GET /profile
 Cookie: session=...
 ```
 
-**Resposta:**
+**Response:**
 ```json
 {
   "id": 1,
@@ -197,64 +197,64 @@ Cookie: session=...
 }
 ```
 
-### Fazer logout
+### Log out
 ```bash
 POST /logout
 Cookie: session=...
 ```
 
-**Resposta:**
+**Response:**
 ```json
 {
   "message": "Logout realizado com sucesso"
 }
 ```
 
-## 🔒 Recursos de Segurança
+## 🔒 Security Features
 
-- **Werkzeug Security**: Hash de senhas com salt
-- **Flask-Login**: Gerenciamento seguro de sessões
-- **SQLAlchemy**: Proteção contra SQL Injection
-- **Validação de dados**: Verificação de entrada do usuário
-- **Sessões criptografadas**: Cookies seguros
-- **Docker**: Isolamento do banco de dados
+- **Werkzeug Security**: Salted password hashing
+- **Flask-Login**: Secure session management
+- **SQLAlchemy**: Protection against SQL Injection
+- **Data validation**: User input checks
+- **Encrypted sessions**: Secure cookies
+- **Docker**: Database isolation
 
-## 🗃️ Estrutura do Banco de Dados
+## 🗃️ Database Structure
 
-O projeto utiliza **MySQL containerizado com Docker**, garantindo:
-- Ambiente isolado e reproduzível
-- Fácil configuração e deploy
-- Persistência de dados em volumes
-- Portabilidade entre ambientes
-- Integridade referencial
-- Transações ACID
+The project uses **MySQL containerized with Docker**, ensuring:
+- An isolated, reproducible environment
+- Easy setup and deployment
+- Data persistence in volumes
+- Portability across environments
+- Referential integrity
+- ACID transactions
 
-## 🐳 Comandos úteis do Docker
+## 🐳 Useful Docker commands
 ```bash
-# Iniciar os containers
+# Start the containers
 docker-compose up -d
 
-# Ver logs do MySQL
+# View MySQL logs
 docker-compose logs db
 
-# Acessar o MySQL via linha de comando
+# Access MySQL from the command line
 docker exec -it  mysql -u admin -p
 
-# Parar os containers
+# Stop the containers
 docker-compose down
 
-# Reiniciar os containers
+# Restart the containers
 docker-compose restart
 ```
 
-## 🤝 Contribuindo
+## 🤝 Contributing
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
-## 📄 Licença
+## 📄 License
 
-Este projeto está sob a licença MIT.
+This project is licensed under the MIT License.
 
-## 👩‍💻 Autora
+## 👩‍💻 Author
 
-Desenvolvido por [Luisa Ferreira](https://github.com/luisaferreirass)
+Developed by [Luisa Ferreira](https://github.com/luisaferreirass)
